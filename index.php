@@ -78,13 +78,47 @@
                         <td>".$row['estampa']."</td>
                         <td>".$row['material']."</td>
                         <td>".$row['valor']."</td>
-                        <td>"."<button>Editar</button>"."</td>
-                        <td>"."<button>Deletar</button>"."</td>
+                        <td>"."<a href='index.php?update=".$row['id_produto']."'>Editar</a>"."</td>
+                        <td>"."<a href='index.php?delete=".$row['id_produto']."'>Deletar</a>"."</td>
                     </tr>";
+                }
+            ?>
+            <?php
+                if(isset($_GET['id_produto'])){
+                    $id = $_GET['id_produto'];
+                    $sql = "DELETE FROM `produto` WHERE `id_produto`='$id'";
+
+                    $result = $connection->query($sql);
+                }
+            ?>
+            <?php
+                if(isset($_POST['update'])){
+                    $marca = $_POST['marca'];
+                    $tamanho = $_POST['tamanho'];
+                    $cor = $_POST['cor'];
+                    $estampa = $_POST['estampa'];
+                    $material = $_POST['material'];
+                    $valor = $_POST['valor'];
+
+                    $sql = "UPDATE 'produto' SET 'marca' = '$marca', 'tamanho' = '$tamanho', 'cor' = '$cor', 'estampa' = '$estampa', 'material' = '$material', 'valor' = '$valor', ";
+
+                    $result = $connection->query($sql);
+
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $marca = $row['marca'];
+                            $tamanho = $row['tamanho'];
+                            $cor = $row['cor'];
+                            $estampa = $row['estampa'];
+                            $material = $row['material'];
+                            $valor = $row['valor'];
+                        }
+                    }
                 }
             ?>
         </table>
     </div>
+    
 </body>
 </html>
 
@@ -94,18 +128,4 @@
     table{ width: 80vw; }
 
     th{ width: 30vw; }
-
-    #prod{ width: 6.5vw; }
-
-    #marca, #botao2{ width: 8.5vw; }
-
-    #tamanho, #material{ width: 9.2vw; }
-
-    #estampa{ width: 9.3vw; }
-
-    #cor{ width: 7.2vw; }
-
-    #valor{ width: 7.8vw; }
-
-    #botao1{ width: 8.2vw; }
 </style>
