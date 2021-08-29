@@ -1,6 +1,29 @@
-<?php $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", ""); ?>
+<?php 
+    $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", "");
+
+    if(isset($_GET['update'])){
+        $id = $_GET['update'];
+        $rec = mysqli_query($connection, "SELECT * FROM chupeta WHERE id_produto=$id");
+        $record = mysqli_fetch_array($rec);
+        $marca = $record['marca'];
+        $tamanho = $record['tamanho'];
+        $cor = $record['cor'];
+        $estampa = $record['estampa'];
+        $material = $record['material'];
+        $valor = $record['valor'];
+        
+    }
+
+    $update = false;
+    $marca = '';
+    $tamanho = '';
+    $cor = '';
+    $estampa = '';
+    $material = '';
+    $valor = '';
+?>
 <?php
-    if(isset($_POST['delete'])||isset($_POST['update'])){
+    if(isset($_POST['delete'])){
         header('Refresh: 0.1; url=index.php');
     }
 ?>
@@ -18,20 +41,24 @@
     <h4>Página administrativa da Chupetinhas</h4>
 
     <h2>Adicionar chupeta</h2>
-    <form action="index.php" method="post">
+    <form method="POST">
         <label for="marca">Marca: </label>
-        <input type="text" name="marca" required>
+        <input type="text" name="marca" required value="<?php echo $marca ?>">
         <label for="tamanho">Tamanho: </label>
-        <input type="text" name="tamanho">
+        <input type="text" name="tamanho" value="<?php echo $tamanho ?>">
         <label for="cor">Cor: </label>
-        <input type="text" name="cor">
+        <input type="text" name="cor" value="<?php echo $cor ?>">
         <label for="estampa">Estampa: </label>
-        <input type="text" name="estampa">
+        <input type="text" name="estampa" value="<?php echo $estampa ?>">
         <label for="material">Material: </label>
-        <input type="text" name="material" required>
+        <input type="text" name="material" required value="<?php echo $material ?>">
         <label for="valor">Valor: </label>
-        <input type="text" name="valor" required>
-        <input type="submit" value="Enviar"/>
+        <input type="text" name="valor" required value="<?php echo $valor ?>">
+        <?php if($update == false): ?>
+            <input type="submit" value="Enviar"/>
+        <?php else: ?>
+            <input type="submit" value="Atualizar"/>
+        <?php endif ?>
         <?php
             if(isset($_POST['marca'], $_POST['tamanho'], $_POST['cor'], $_POST['estampa'], $_POST['material'], $_POST['valor'], )){
                 $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", "");
@@ -83,7 +110,7 @@
                         <td>".$row['estampa']."</td>
                         <td>".$row['material']."</td>
                         <td>".$row['valor']."</td>
-                        <form method='POST'>
+                        <form method='GET'>
                             <td>"."<button type='submit' name='update' value='".$row['id_produto']."'>Editar</button>"."</td>
                             <td>"."<button type='submit' name='delete' value='".$row['id_produto']."'>Deletar</button>"."</td>
                         </form>
