@@ -25,6 +25,7 @@
         <input type="text" name="material" value="<?php echo $material; ?>" placeholder="Insira o material">
         <label>Valor: </label>
         <input type="text" name="valor" value="<?php echo $valor; ?>" placeholder="Insira o valor">
+        
         <button type="submit" name="adicionar">Adicionar</button>
     </form>
 
@@ -49,6 +50,7 @@
                     <th colspan="2">Ação</th>
                 </tr>
             </thead>
+
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
                     <td><?php echo $row['id_produto'] ?></td>
@@ -64,7 +66,6 @@
                     </td>
                 </tr>
             <?php endwhile; ?>
-                
             
         </table>
     </div>

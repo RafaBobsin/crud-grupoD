@@ -18,12 +18,14 @@
         $valor = $_POST['valor'];
 
         $connection->query("INSERT INTO produto (marca, tamanho, cor, estampa, material, valor) VALUES ('$marca', '$tamanho', '$cor', '$estampa', '$material', '$valor')");
+        header("Refresh: 0.1; url=index.php");
     }
 
     if(isset($_GET['deletar'])){
         $id = $_GET['deletar'];
         
         $connection->query("DELETE FROM produto WHERE id_produto=$id");
+        header("Refresh: 0.1; url=index.php");
     }
 
     if(isset($_GET['selecionar'])){
