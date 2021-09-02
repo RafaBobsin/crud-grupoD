@@ -1,9 +1,5 @@
 <?php $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", ""); ?>
-<?php
-    if(isset($_POST['delete'])||isset($_POST['update'])){
-        header('Refresh: 0.1; url=index.php');
-    }
-?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,8 +14,7 @@
     <h4>Página administrativa da Chupetinhas</h4>
 
     <h2>Adicionar chupeta</h2>
-    <form action="index.php" method="post">
-        
+    <form action="adicionar.php" method="post">
         <label for="marca">Marca: </label>
         <input type="text" name="marca" required>
         <label for="tamanho">Tamanho: </label>
@@ -33,25 +28,6 @@
         <label for="valor">Valor: </label>
         <input type="text" name="valor" required>
         <input type="submit" value="Enviar"/>
-
-        <?php
-            if(isset($_POST['marca'], $_POST['tamanho'], $_POST['cor'], $_POST['estampa'], $_POST['material'], $_POST['valor'], )){
-                $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", "");
-                $sql = "INSERT INTO produto (marca, tamanho, cor, estampa, material, valor) VALUES (:marca, :tamanho, :cor, :estampa, :material, :valor)";
-                $statement = $connection->prepare($sql);
-                $valores = array(
-                    "marca"=>$_POST['marca'],
-                    "tamanho"=>$_POST['tamanho'],
-                    "cor"=>$_POST['cor'],
-                    "estampa"=>$_POST['estampa'],
-                    "material"=>$_POST['material'],
-                    "valor"=>$_POST['valor']
-                );
-                $statement->execute($valores);
-            } else {
-                echo "";
-            }
-        ?>
     </form>
 
     <br>
@@ -85,19 +61,11 @@
                         <td>".$row['estampa']."</td>
                         <td>".$row['material']."</td>
                         <td>".$row['valor']."</td>
-                        <form method='POST'>
+                        <form action='deletar.php' method='POST'>
                             <td>"."<button type='submit' name='update' value='".$row['id_produto']."'>Editar</button>"."</td>
                             <td>"."<button type='submit' name='delete' value='".$row['id_produto']."'>Deletar</button>"."</td>
                         </form>
                     </tr>";
-                }
-            ?>
-            <?php
-                if(isset($_POST['delete'])){
-                    $id = $_POST['delete'];
-                    $sql = "DELETE FROM `produto` WHERE `id_produto` = '{$id}'";
-
-                    $result = $connection->query($sql);
                 }
             ?>
         </table>
