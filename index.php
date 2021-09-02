@@ -1,45 +1,70 @@
+<?php $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", ""); ?>
+<?php
+    if(isset($_POST['delete'])||isset($_POST['update'])){
+        header('Refresh: 0.1; url=index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chupetinha</title>
+    <title>Loja de Chupeta</title>
 </head>
 <body>
     <?php require_once 'crud.php' ?>
+    <h1>Loja de Chupeta</h1>
+    <h4>Página administrativa da Chupetinhas</h4>
 
-    <h1>Chupetinhas</h1>
-    <h3>Página administrativa das Chupetinhas</h3>
-    <h2>Adicionar chupeta:</h2>
-    <form action="crud.php" method="POST">
-        <label>Marca: </label>
-        <input type="text" name="marca" value="<?php echo $marca; ?>" placeholder="Insira o nome da marca">
-        <label>Tamanho: </label>
-        <input type="text" name="tamanho" value="<?php echo $tamanho; ?>" placeholder="Insira o tamanho">
-        <label>Cor: </label>
-        <input type="text" name="cor" value="<?php echo $cor; ?>" placeholder="Insira a cor">
-        <label>Estampa: </label>
-        <input type="text" name="estampa" value="<?php echo $estampa; ?>" placeholder="Insira a estampa">
-        <label>Material: </label>
-        <input type="text" name="material" value="<?php echo $material; ?>" placeholder="Insira o material">
-        <label>Valor: </label>
-        <input type="text" name="valor" value="<?php echo $valor; ?>" placeholder="Insira o valor">
+    <h2>Adicionar chupeta</h2>
+    <form action="index.php" method="post">
         
-        <button type="submit" name="adicionar">Adicionar</button>
+        <label for="marca">Marca: </label>
+        <input type="text" name="marca" required>
+        <label for="tamanho">Tamanho: </label>
+        <input type="text" name="tamanho">
+        <label for="cor">Cor: </label>
+        <input type="text" name="cor">
+        <label for="estampa">Estampa: </label>
+        <input type="text" name="estampa">
+        <label for="material">Material: </label>
+        <input type="text" name="material" required>
+        <label for="valor">Valor: </label>
+        <input type="text" name="valor" required>
+        <input type="submit" value="Enviar"/>
+
+        <?php
+            if(isset($_POST['marca'], $_POST['tamanho'], $_POST['cor'], $_POST['estampa'], $_POST['material'], $_POST['valor'], )){
+                $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", "");
+                $sql = "INSERT INTO produto (marca, tamanho, cor, estampa, material, valor) VALUES (:marca, :tamanho, :cor, :estampa, :material, :valor)";
+                $statement = $connection->prepare($sql);
+                $valores = array(
+                    "marca"=>$_POST['marca'],
+                    "tamanho"=>$_POST['tamanho'],
+                    "cor"=>$_POST['cor'],
+                    "estampa"=>$_POST['estampa'],
+                    "material"=>$_POST['material'],
+                    "valor"=>$_POST['valor']
+                );
+                $statement->execute($valores);
+            } else {
+                echo "";
+            }
+        ?>
     </form>
 
-    <br><br>
+    <br>
 
-    <?php
-        $connection = new mysqli('localhost', 'root', '', 'chupeta');
-        $result = $connection->query("SELECT * FROM produto");
-    ?>
-
-    <div>
+    <div class="tabela">
         <table>
-            <thead>
-                <tr>
+            <?php 
+                $sql = "SELECT * FROM produto";
+                $statement = $connection->prepare($sql);
+                $statement->execute();
+                
+                echo
+                "<tr>
                     <th>ID</th>
                     <th>Marca</th>
                     <th>Tamanho</th>
@@ -47,40 +72,44 @@
                     <th>Estampa</th>
                     <th>Material</th>
                     <th>Valor</th>
-                    <th colspan="2">Ação</th>
-                </tr>
-            </thead>
+                    <th>Editar</th>
+                    <th>Excluir</th>
+                </tr>";
+                while($row = $statement->fetch()) {
+                    echo
+                    "<tr>
+                        <td>".$row['id_produto']."</td>
+                        <td>".$row['marca']."</td>
+                        <td>".$row['tamanho']."</td>
+                        <td>".$row['cor']."</td>
+                        <td>".$row['estampa']."</td>
+                        <td>".$row['material']."</td>
+                        <td>".$row['valor']."</td>
+                        <form method='POST'>
+                            <td>"."<button type='submit' name='update' value='".$row['id_produto']."'>Editar</button>"."</td>
+                            <td>"."<button type='submit' name='delete' value='".$row['id_produto']."'>Deletar</button>"."</td>
+                        </form>
+                    </tr>";
+                }
+            ?>
+            <?php
+                if(isset($_POST['delete'])){
+                    $id = $_POST['delete'];
+                    $sql = "DELETE FROM `produto` WHERE `id_produto` = '{$id}'";
 
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo $row['id_produto'] ?></td>
-                    <td><?php echo $row['marca'] ?></td>
-                    <td><?php echo $row['tamanho'] ?></td>
-                    <td><?php echo $row['cor'] ?></td>
-                    <td><?php echo $row['estampa'] ?></td>
-                    <td><?php echo $row['material'] ?></td>
-                    <td><?php echo $row['valor'] ?></td>
-                    <td>
-                        <a href="index.php?selecionar=<?php echo $row['id_produto']; ?>">Alterar</a>
-                        <a href="crud.php?deletar=<?php echo $row['id_produto']; ?>">Deletar</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-            
+                    $result = $connection->query($sql);
+                }
+            ?>
         </table>
     </div>
-
-    <?php
-        function pre_r($array){
-            echo '<pre>';
-            print_r($array);
-            echo '</pre>';
-        }
-    ?>
-
+    
 </body>
 </html>
 
 <style>
     table, th, td { border:1px solid black; }
+
+    table{ width: 90vw; }
+
+    th{ width: 40vw; }
 </style>
