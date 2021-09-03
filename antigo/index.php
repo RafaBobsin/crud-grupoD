@@ -59,9 +59,11 @@
                         <td>".$row['estampa']."</td>
                         <td>".$row['material']."</td>
                         <td>".$row['valor']."</td>
+
                         <form action='alterar.php' method='POST'>
-                            <td>"."<button type='submit' name='update' value='".$row['id_produto']."'>Editar</button>"."</td>
+                            <td>"."<button type='submit' name='id_produto' value='".$row['id_produto']."'>Editar</button>"."</td>
                         </form>
+
                         <form action='deletar.php' method='POST'>
                             <td>"."<button type='submit' name='delete' value='".$row['id_produto']."'>Deletar</button>"."</td>
                         </form>
