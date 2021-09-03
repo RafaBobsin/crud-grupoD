@@ -6,7 +6,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
     <title>Loja de Chupeta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Loja de Chupeta</h1>
@@ -26,7 +30,7 @@
         <input type="text" name="material">
         <label for="valor">Valor: </label>
         <input type="text" name="valor" required>
-        <input type="submit" value="Enviar"/>
+        <input id="btn" type="submit" value="Enviar"/>
     </form>
 
     <br>
@@ -61,11 +65,11 @@
                         <td>".$row['valor']."</td>
 
                         <form action='alterar.php' method='POST'>
-                            <td>"."<button type='submit' name='id_produto' value='".$row['id_produto']."'>Editar</button>"."</td>
+                            <td class='alinhar'>"."<button class='btns' type='submit' name='id_produto' value='".$row['id_produto']."'>Editar</button>"."</td>
                         </form>
 
                         <form action='deletar.php' method='POST'>
-                            <td>"."<button type='submit' name='delete' value='".$row['id_produto']."'>Deletar</button>"."</td>
+                            <td class='alinhar'>"."<button class='btns' type='submit' name='delete' value='".$row['id_produto']."'>Deletar</button>"."</td>
                         </form>
                     </tr>";
                 }
@@ -75,11 +79,3 @@
     
 </body>
 </html>
-
-<style>
-    table, th, td { border:1px solid black; }
-
-    table{ width: 70vw; }
-
-    th{ width: 40vw; }
-</style>

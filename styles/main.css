@@ -1,0 +1,79 @@
+body{
+    background-color: #fdffb6/*#fff0af*/;
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin: auto;
+    font-family: 'Nunito', sans-serif;
+}
+
+h1, h4{
+    text-align: center;
+}
+
+h1{
+    margin-bottom: 0;
+}
+
+h2{
+    margin-left: 5vw;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: auto;
+}
+
+form input{
+    margin-bottom: 2vh;
+    height: 3vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 5px;
+    border: 1px solid #fcbf49;
+}
+
+form #btn{
+    width: 20vw;
+    align-self: center;
+    margin-top: 2vh;
+    background-color: #a0c4ff;
+    border: 1px solid #628ccf;
+    height: 4vh;
+    border-radius: 5px;
+}
+
+.tabela{
+    margin: auto;
+    margin-bottom: 5vh;
+}
+
+.btns{
+    background-color: #a0c4ff;
+    border: 1px solid #628ccf;
+}
+
+.alinhar{
+    text-align: center;
+}
+
+table, th, td { 
+    border: 1px solid black; 
+    background-color: #bde0fe;
+}
+
+table{ 
+    width: 80vw;
+    border-radius: 5px
+}
+
+th{ 
+    width: 35w;
+}
+
+#tituloEdit{
+    text-align: center;
+    margin-top: 5vh;
+}
