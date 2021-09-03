@@ -9,7 +9,6 @@
     <title>Loja de Chupeta</title>
 </head>
 <body>
-    <?php require_once 'crud.php' ?>
     <h1>Loja de Chupeta</h1>
     <h4>Página administrativa da Chupetinhas</h4>
 
@@ -24,7 +23,7 @@
         <label for="estampa">Estampa: </label>
         <input type="text" name="estampa">
         <label for="material">Material: </label>
-        <input type="text" name="material" required>
+        <input type="text" name="material">
         <label for="valor">Valor: </label>
         <input type="text" name="valor" required>
         <input type="submit" value="Enviar"/>
@@ -48,8 +47,7 @@
                     <th>Estampa</th>
                     <th>Material</th>
                     <th>Valor</th>
-                    <th>Editar</th>
-                    <th>Excluir</th>
+                    <th colspan='2'>Ação</th>
                 </tr>";
                 while($row = $statement->fetch()) {
                     echo
@@ -61,8 +59,10 @@
                         <td>".$row['estampa']."</td>
                         <td>".$row['material']."</td>
                         <td>".$row['valor']."</td>
-                        <form action='deletar.php' method='POST'>
+                        <form action='alterar.php' method='POST'>
                             <td>"."<button type='submit' name='update' value='".$row['id_produto']."'>Editar</button>"."</td>
+                        </form>
+                        <form action='deletar.php' method='POST'>
                             <td>"."<button type='submit' name='delete' value='".$row['id_produto']."'>Deletar</button>"."</td>
                         </form>
                     </tr>";
@@ -77,7 +77,7 @@
 <style>
     table, th, td { border:1px solid black; }
 
-    table{ width: 90vw; }
+    table{ width: 70vw; }
 
     th{ width: 40vw; }
 </style>
