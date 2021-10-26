@@ -16,14 +16,15 @@
     <h1>Loja de Chupeta</h1>
     <h4>Página administrativa da Chupetinhas</h4>
 
-    <a href="#">Home</a>
-    <a href="crud_produto/index.php">Produtos</a>
-    <a href="crud_usuario/index.php">Usuários</a>
-    <a href="crud_venda/index.php">Vendas</a>
-    <a href="login.php">Sair</a>
+    <h2>Login</h2>
+    <form action="index.php" method="post">
+        <label for="email">E-mail: </label>
+        <input type="text" name="email" required>
+        <label for="senha">Senha: </label>
+        <input type="text" name="senha" required>
+        <input id="btn" type="submit" value="Enviar"/>
+    </form>
 
-    <h2>Página inicial</h2>
-    
     <br>
     
 </body>
