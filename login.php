@@ -1,31 +1,34 @@
-<?php $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", ""); ?>
+<?php
+session_start();
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
-    <title>Loja de Chupeta</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
-    <h1>Loja de Chupeta</h1>
-    <h4>Página administrativa da Chupetinhas</h4>
+if (!isset($_POST['usuario'], $_POST['senha']))
+{
+    die('Formulário incompleto<br>
+    <a href="formulario.php">Voltar</a>');
+}
 
-    <h2>Login</h2>
-    <form action="index.php" method="post">
-        <label for="email">E-mail: </label>
-        <input type="text" name="email" required>
-        <label for="senha">Senha: </label>
-        <input type="text" name="senha" required>
-        <input id="btn" type="submit" value="Enviar"/>
-    </form>
+$usuarioValido = 'user';
+$senhaValida = '123';
 
-    <br>
-    
-</body>
-</html>
+if($usuarioValido == $_POST['usuario'])
+{
+    if($senhaValida == $_POST['senha'])
+    {
+        // SALVAR NA SESSAO
+        $_SESSION['usuario'] = $_POST['usuario'];
+        header('location: index.php');
+        exit;
+    }
+    else
+    {
+        die('Senha incorreta!<br>
+        <a href="formulario.php">Voltar</a>');
+    }
+}
+else
+{
+    die("Usuário incorreto!<br>
+    <a href='formulario.php'>Voltar</a>");
+}
+
+

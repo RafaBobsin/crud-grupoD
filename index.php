@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario']))
+{
+    header('location: formulario.php');
+    exit;
+}
+
+?>
+
 <?php $connection = new PDO("mysql:host=localhost;dbname=chupeta", "root", ""); ?>
 
 <!DOCTYPE html>
@@ -15,16 +26,24 @@
 <body>
     <h1>Loja de Chupeta</h1>
     <h4>Página administrativa da Chupetinhas</h4>
-
-    <a href="#">Home</a>
-    <a href="crud_produto/index.php">Produtos</a>
-    <a href="crud_usuario/index.php">Usuários</a>
-    <a href="crud_venda/index.php">Vendas</a>
-    <a href="login.php">Sair</a>
+    
+    <nav>
+        <a href="#">Home</a>
+        <a href="crud_produto/index.php">Produtos</a>
+        <a href="crud_usuario/index.php">Clientes</a>
+        <a href="crud_venda/index.php">Vendas</a>
+        <a href="logout.php">Sair</a>
+    </nav>
 
     <h2>Página inicial</h2>
-    
-    <br>
+    <div class="inicio">
+        <p>Bem-vindo à página inicial das Chupetinhas, abaixo você poderá visualizar todas as informações sobre os produtos, clientes e vendas :D</p>
+        <p>
+            Grupo: Júlia Martins, Maitê Nascimento, Mell Matsuda e Rafaela Bobsin<br>
+            401 INFO
+        </p>
+    </div>
+
     
 </body>
 </html>

@@ -19,7 +19,7 @@ h2{
     margin-left: 5vw;
 }
 
-form{
+form, nav, .inicio{
     display: flex;
     flex-direction: column;
     width: 80vw;
@@ -35,7 +35,7 @@ form input{
     border: 1px solid #fcbf49;
 }
 
-form #btn{
+form #btn, nav a{
     width: 20vw;
     align-self: center;
     margin-top: 2vh;
@@ -76,4 +76,16 @@ th{
 #tituloEdit{
     text-align: center;
     margin-top: 5vh;
+}
+
+nav {
+    flex-direction: row;
+}
+
+nav a {
+    margin-right: 2vw;
+    margin-left: 2vw;
+    text-align: center;
+    text-decoration: none;
+    color: black;
 }

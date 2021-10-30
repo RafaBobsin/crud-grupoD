@@ -16,20 +16,22 @@
     <h1>Loja de Chupeta</h1>
     <h4>Página administrativa da Chupetinhas</h4>
 
-    <a href="../index.php">Home</a>
-    <a href="../crud_produto/index.php">Produtos</a>
-    <a href="../crud_usuario/index.php">Usuários</a>
-    <a href="#">Vendas</a>
-    <a href="../login.php">Sair</a>
+    <nav>
+        <a href="../index.php">Home</a>
+        <a href="../crud_produto/index.php">Produtos</a>
+        <a href="../crud_usuario/index.php">Clientes</a>
+        <a href="#">Vendas</a>
+        <a href="../logout.php">Sair</a>
+    </nav>
 
     <h2>Adicionar Venda</h2>
     <form action="adicionar.php" method="post">
         <label for="id_cliente">ID cliente: </label>
-        <input type="text" name="id_cliente" required>
+        <input type="text" name="id_cliente" >
         <label for="id_produto">ID produto: </label>
-        <input type="text" name="id_produto" required>
+        <input type="text" name="id_produto" >
         <label for="valor">Valor: </label>
-        <input type="text" name="valor" required>
+        <input type="text" name="valor" >
         <label for="data">Data: </label>
         <input type="text" name="data">
         <label for="quantidade">Quantidade: </label>

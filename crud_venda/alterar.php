@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="styles/main.css">
+<link rel="stylesheet" type="text/css" href="../styles/main.css">
 <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;700;800&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
     
     if(isset($_POST['id_venda'])){
         $id = $_POST['id_venda'];
-        $sql = "SELECT * FROM venda WHERE id_venda=$id";
+        $sql = "SELECT * FROM venda WHERE id_venda = $id";
         
         $stnt = $connection->prepare($sql);
         $stnt -> execute();
@@ -46,25 +46,25 @@
     
 ?>
 
-<h2 id="tituloEdit">Editar chupeta</h2>
+<h2 id="tituloEdit">Editar venda</h2>
 <form action="alterar.php" method="post">
 
     <label for="marca">ID: </label>
-    <input type="text" name="id" readonly value="<?=$row['id_produto']?>">
+    <input type="text" name="id" readonly value="<?=$row['id_venda']?>">
 
-    <label for="id_cliente">id_cliente: </label>
+    <label for="id_cliente">ID cliente: </label>
     <input type="text" name="id_cliente" required value="<?=$row['id_cliente']?>">
 
-    <label for="id_produto">id_produto: </label>
+    <label for="id_produto">ID produto: </label>
     <input type="text" name="id_produto" value="<?=$row['id_produto']?>">
 
-    <label for="valor">valor: </label>
+    <label for="valor">Valor: </label>
     <input type="text" name="valor" value="<?=$row['valor']?>">
 
-    <label for="data">data: </label>
+    <label for="data">Data: </label>
     <input type="text" name="data" value="<?=$row['data']?>">
 
-    <label for="quantidade">quantidade: </label>
+    <label for="quantidade">Quantidade: </label>
     <input type="text" name="quantidade" value="<?=$row['quantidade']?>">
 
     <input type="submit" value="Enviar" id="btn"/>

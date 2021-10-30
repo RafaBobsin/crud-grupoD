@@ -16,11 +16,13 @@
     <h1>Loja de Chupeta</h1>
     <h4>Página administrativa da Chupetinhas</h4>
 
-    <a href="../index.php">Home</a>
-    <a href="#">Produtos</a>
-    <a href="../crud_usuario/index.php">Usuários</a>
-    <a href="../crud_venda/index.php">Vendas</a>
-    <a href="../login.php">Sair</a>
+    <nav>
+        <a href="../index.php">Home</a>
+        <a href="#">Produtos</a>
+        <a href="../crud_usuario/index.php">Clientes</a>
+        <a href="../crud_venda/index.php">Vendas</a>
+        <a href="../logout.php">Sair</a>
+    </nav>
 
     <h2>Adicionar chupeta</h2>
     <form action="adicionar.php" method="post">
